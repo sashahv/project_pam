@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">project</string>
+    <string name="add_book">Add book</string>
+    <string name="title">Title</string>
+    <string name="genre">Genre</string>
+    <string name="author">Author</string>
+    <string name="rating">Rating</string>
+    <string name="is_read">Is read</string>
+    <string name="already_read">Already read</string>
+    <string name="not_read">Not read yet</string>
+</resources>
