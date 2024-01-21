@@ -9,7 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
-import com.plcoding.project.ui.theme.RoomGuideAndroidTheme
+import com.plcoding.project.ui.theme.BooksTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            RoomGuideAndroidTheme {
+            BooksTheme {
                 val state by viewModel.state.collectAsState()
                 BookScreen(state = state, onEvent = viewModel::onEvent)
             }

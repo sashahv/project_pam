@@ -8,4 +8,6 @@
     <string name="is_read">Is read</string>
     <string name="already_read">Already read</string>
     <string name="not_read">Not read yet</string>
+    <string name="sort_field">Sort field:</string>
+    <string name="confirm">Confirm</string>
 </resources>

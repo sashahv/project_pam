@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.plcoding.roomguideandroid'
+    namespace 'com.plcoding.project'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.plcoding.roomguideandroid"
+        applicationId "com.plcoding.project"
         minSdk 24
         targetSdk 33
         versionCode 1
