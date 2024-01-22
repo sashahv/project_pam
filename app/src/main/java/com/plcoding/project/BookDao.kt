@@ -5,7 +5,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Upsert
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -31,4 +30,7 @@ interface BookDao {
 
     @Query("SELECT * FROM book ORDER BY isRead ASC")
     fun getBooksOrderedByIsRead(): Flow<List<Book>>
+
+    @Query("SELECT * FROM book WHERE title = :sTitle ")
+    fun getBooksByTitle(sTitle: String): Flow<List<Book>>
 }

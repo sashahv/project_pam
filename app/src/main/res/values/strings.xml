@@ -16,4 +16,13 @@
     <string name="book_deleted">Book deleted</string>
     <string name="sorted_by">List sorted by</string>
     <string name="books">Books</string>
+    <string name="book_list">List of books</string>
+    <string name="status_changed">Congrats with reading new book!</string>
+    <string name="page_calculator">Pages calculator</string>
+    <string name="pages_per_day">Pages per day</string>
+    <string name="total_pages">Total pages</string>
+    <string name="calculate">Calculate</string>
+    <string name="days_needed">Days needed</string>
+    <string name="calculator_tip">Enter the number of pages you read per day and the total number of pages.</string>
+    <string name="add_more_books">Add more books</string>
 </resources>

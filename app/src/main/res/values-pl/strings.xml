@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">projekt</string>
+    <string name="add_book">Dodaj książkę</string>
+    <string name="title">Tytuł</string>
+    <string name="genre">Gatunek</string>
+    <string name="author">Autor</string>
+    <string name="rating">Ocena</string>
+    <string name="is_read">Przeczytana</string>
+    <string name="already_read">Już przeczytane</string>
+    <string name="not_read">Nieprzeczytana</string>
+    <string name="sort_field">Pole sortowania:</string>
+    <string name="confirm">Potwierdź</string>
+    <string name="blank_title">Tytuł jest wymagany</string>
+    <string name="invalid_rating">Nieprawidłowa ocena (powinna być od 0 do 10)</string>
+    <string name="book_added">Książka dodana</string>
+    <string name="book_deleted">Książka usunięta</string>
+    <string name="sorted_by">Lista posortowana według</string>
+    <string name="books">Książki</string>
+    <string name="book_list">Lista książek</string>
+    <string name="status_changed">Gratulacje z przeczytaniem nowej książki!</string>
+    <string name="page_calculator">Kalkulator stron</string>
+    <string name="pages_per_day">Strony na dzień</string>
+    <string name="total_pages">Całkowita liczba stron w książce</string>
+    <string name="calculate">Oblicz</string>
+    <string name="days_needed">Ilość dni</string>
+    <string name="calculator_tip">Wprowadź liczbę stron, które czytasz dziennie, oraz całkowitą liczbę stron ksiązki.</string>
+    <string name="add_more_books">Dodaj więcej książek</string>
+</resources>

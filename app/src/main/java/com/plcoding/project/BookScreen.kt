@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -25,10 +26,11 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
@@ -58,13 +60,21 @@ fun BookScreen(
     state: BookState,
     context: Context,
     onEvent: (BookEvent) -> Unit,
-    navigateToAddBookScreen: () -> Unit
+    navigateToAddBookScreen: () -> Unit,
+    navigateToCalculatorScreen: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     var selectedIndex by remember { mutableStateOf(0) }
     Scaffold(
-        modifier = Modifier.padding(16.dp)
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = stringResource(R.string.book_list), color = Color.Black)
+                }
+            )
+        },
     ) { padding ->
+
 
         LazyColumn(
             contentPadding = padding,
@@ -72,6 +82,7 @@ fun BookScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
+                Spacer(modifier = Modifier.height(16.dp))
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.clickable {
@@ -81,6 +92,7 @@ fun BookScreen(
                     Icon(
                         imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                         contentDescription = "Sort",
+                        tint = Color.Black,
                         modifier = Modifier.padding(end = 4.dp)
                     )
 
@@ -118,7 +130,7 @@ fun BookScreen(
                                         context.getString(R.string.sorted_by) + " " + getSortFieldString(
                                             sortField,
                                             context
-                                        ), LightBlue
+                                        ), LightBlue, false
                                     )
                                     expanded = false
                                 },
@@ -177,15 +189,12 @@ fun BookScreen(
                     }
                     IconButton(onClick = {
                         onEvent(BookEvent.DeleteBook(book))
-                    }) {
-                        Icon(
-                            imageVector = Icons.Default.Edit,
-                            contentDescription = "Edit book"
+                        showToast(
+                            context,
+                            context.getString(R.string.book_deleted),
+                            LightBlue,
+                            false
                         )
-                    }
-                    IconButton(onClick = {
-                        onEvent(BookEvent.DeleteBook(book))
-                        showToast(context, context.getString(R.string.book_deleted), LightBlue)
                     }) {
                         Icon(
                             imageVector = Icons.Default.Delete,
@@ -202,20 +211,59 @@ fun BookScreen(
                 .padding(16.dp),
             contentAlignment = Alignment.BottomCenter
         ) {
-            Button(
-                onClick = navigateToAddBookScreen,
+            Row(
                 modifier = Modifier
-                    .padding(16.dp) // Adjust padding as needed
+                    .fillMaxWidth()
+                    .padding(16.dp), // Adjust padding as needed
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Icon(
-                    imageVector = Icons.Default.Add, // Use your own icon resource
-                    contentDescription = stringResource(R.string.add_book),
-                    modifier = Modifier.size(18.dp),
-                    tint = Color.Black
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(text = stringResource(R.string.add_book), color = Color.Black)
+                Button(
+                    onClick = {
+                        showToast(
+                            context,
+                            context.getString(R.string.add_book), LightBlue, true
+                        )
+
+                        navigateToAddBookScreen()
+                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Add, // Use your own icon resource
+                        contentDescription = stringResource(R.string.add_book),
+                        modifier = Modifier.size(18.dp),
+                        tint = Color.Black
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(text = stringResource(R.string.add_book), color = Color.Black)
+                }
+
+                Button(
+                    onClick = {
+                        showToast(
+                            context,
+                            context.getString(R.string.page_calculator), LightBlue, true
+                        )
+
+                        navigateToCalculatorScreen()
+                    },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(8.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = stringResource(R.string.page_calculator),
+                        modifier = Modifier.size(18.dp),
+                        tint = Color.Black
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(text = stringResource(R.string.page_calculator), color = Color.Black)
+                }
             }
         }
+
     }
 }

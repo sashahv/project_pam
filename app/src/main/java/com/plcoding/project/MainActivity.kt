@@ -4,8 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Gravity
-import android.view.LayoutInflater
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -19,9 +20,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.plcoding.project.ui.theme.BooksTheme
-import com.plcoding.project.ui.theme.LightBlue
-import com.plcoding.project.ui.theme.LightOrange
-import com.plcoding.project.ui.theme.WarningRed
 
 class MainActivity : ComponentActivity() {
 
@@ -57,9 +55,18 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
 @SuppressLint("RtlHardcoded")
-fun showToast(context: Context, message: String, bgColor: Color) {
+fun showToast(context: Context, message: String, bgColor: Color, empty: Boolean) {
+    // Check if there is an active toast, cancel it using Handler
+    currentToast?.let {
+        Handler(Looper.getMainLooper()).postDelayed({
+            it.cancel()
+        }, 0)
+    }
+    if(empty){
+        return
+    }
+
     val toast = Toast(context)
 
     val textView = TextView(context)
@@ -78,15 +85,17 @@ fun showToast(context: Context, message: String, bgColor: Color) {
     val paddingInPx = (paddingInDp * scale + 0.5f).toInt()
     textView.setPadding(paddingInPx, paddingInPx, paddingInPx, paddingInPx)
 
-    if (bgColor == WarningRed) {
-        toast.setGravity(Gravity.TOP or Gravity.CENTER, 0, 450)
-    } else {
-        toast.setGravity(Gravity.TOP or Gravity.RIGHT, 55, 35)
-    }
+    toast.setGravity(Gravity.BOTTOM or Gravity.CENTER, 0, 400)
 
     toast.duration = Toast.LENGTH_LONG
 
     toast.view = textView
 
+    // Set the current toast to the new one
+    currentToast = toast
+
     toast.show()
 }
+
+// Declare a global variable to keep track of the current active toast
+private var currentToast: Toast? = null

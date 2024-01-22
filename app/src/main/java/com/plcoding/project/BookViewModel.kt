@@ -1,9 +1,7 @@
 package com.plcoding.project
 
 import android.content.Context
-import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.plcoding.project.ui.theme.LightBlue
 import com.plcoding.project.ui.theme.WarningRed
@@ -60,12 +58,10 @@ class BookViewModel(
                 val isRead = state.value.isRead
 
                 if (title.isBlank()){
-                    showToast(context, context.getString(R.string.blank_title), WarningRed)
+                    showToast(context, context.getString(R.string.blank_title), WarningRed, false)
                     return;
-                }
-
-                if (rating.isNaN() || rating < 1 || rating > 10){
-                    showToast(context, context.getString(R.string.invalid_rating), WarningRed)
+                } else if (rating.isNaN() || rating < 1 || rating > 10){
+                    showToast(context, context.getString(R.string.invalid_rating), WarningRed, false)
                     return;
                 }
 
@@ -78,7 +74,7 @@ class BookViewModel(
                 )
 
                 viewModelScope.launch {
-                    dao.upsertBook(book)
+                   dao.upsertBook(book)
                 }
 
                 _state.update { it.copy(
@@ -88,7 +84,7 @@ class BookViewModel(
                     rating = 0.0,
                     isRead = false
                 ) }
-                showToast(context, context.getString(R.string.book_added), LightBlue)
+                showToast(context, context.getString(R.string.book_added), LightBlue, false)
             }
 
             is BookEvent.SetTitle -> {
