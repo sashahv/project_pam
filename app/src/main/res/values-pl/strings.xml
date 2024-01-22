@@ -25,4 +25,6 @@
     <string name="days_needed">Ilość dni</string>
     <string name="calculator_tip">Wprowadź liczbę stron, które czytasz dziennie, oraz całkowitą liczbę stron ksiązki.</string>
     <string name="add_more_books">Dodaj więcej książek</string>
+    <string name="info_no_repeat">Po kliknięciu przycisku „Dodaj” przeniesie do strony głównej.</string>
+    <string name="info_repeat">Po kliknięciu przycisku „Dodaj” nie przeniesie do strony głównej.</string>
 </resources>

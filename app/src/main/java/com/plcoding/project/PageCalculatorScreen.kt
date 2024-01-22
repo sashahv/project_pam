@@ -1,6 +1,7 @@
 package com.plcoding.project
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -17,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.plcoding.project.navigation.NavigationDestination
+import com.plcoding.project.ui.theme.LightBlue
 
 object PageCalculatorScreenDestination : NavigationDestination {
     override val route = "page_calculator"
@@ -26,7 +28,8 @@ object PageCalculatorScreenDestination : NavigationDestination {
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun PageCalculatorScreen(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    context: Context
 ) {
     var pagesPerDay by remember { mutableStateOf(0) }
     var totalPages by remember { mutableStateOf(0) }
@@ -40,7 +43,13 @@ fun PageCalculatorScreen(
                 title = { Text(text = stringResource(R.string.page_calculator), color = Color.Black) },
                 navigationIcon = {
                     IconButton(
-                        onClick = navigateBack
+                        onClick = {
+                            showToast(
+                                context,
+                                context.getString(R.string.add_book), LightBlue, true
+                            )
+                            navigateBack()
+                        }
                     ) {
                         Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null,
                             tint = Color.Black)

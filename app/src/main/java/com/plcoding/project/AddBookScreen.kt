@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.plcoding.project.navigation.NavigationDestination
+import com.plcoding.project.ui.theme.LightBlue
 import com.plcoding.project.ui.theme.WarningRed
 
 
@@ -40,7 +41,13 @@ fun AddBookScreen(
                 title = { Text(text = stringResource(R.string.add_book), color = Color.Black) },
                 navigationIcon = {
                     IconButton(
-                        onClick = navigateBack
+                        onClick = {
+                            showToast(
+                                context,
+                                context.getString(R.string.add_book), LightBlue, true
+                            )
+                            navigateBack()
+                        }
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.ArrowBack,
@@ -143,6 +150,21 @@ fun AddBookScreen(
                         checked = addMoreBooks,
                         onCheckedChange = {
                             addMoreBooks = (!addMoreBooks)
+                            if(addMoreBooks==false){
+                                showToast(
+                                    context,
+                                    context.getString(R.string.info_no_repeat),
+                                    LightBlue,
+                                    false
+                                )
+                            } else {
+                                showToast(
+                                    context,
+                                    context.getString(R.string.info_repeat),
+                                    LightBlue,
+                                    false
+                                )
+                            }
                         },
                         modifier = Modifier
                     )

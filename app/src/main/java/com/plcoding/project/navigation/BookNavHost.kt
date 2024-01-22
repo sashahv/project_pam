@@ -52,7 +52,7 @@ fun BookNavHost(
             PageCalculatorScreen(
                 navigateBack = {
                     navController.navigate(BookScreenDestination.route)
-                }
+                }, context
             )
         }
     }

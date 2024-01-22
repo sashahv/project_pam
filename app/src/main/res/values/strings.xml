@@ -25,4 +25,6 @@
     <string name="days_needed">Days needed</string>
     <string name="calculator_tip">Enter the number of pages you read per day and the total number of pages.</string>
     <string name="add_more_books">Add more books</string>
+    <string name="info_no_repeat">Now when you click the \'Add\' button, it redirect to the homepage</string>
+    <string name="info_repeat">Now when you click the \'Add\' button, it does not redirect to the homepage</string>
 </resources>
