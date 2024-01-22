@@ -1,10 +1,12 @@
 package com.plcoding.project
 
 import android.content.Context
-import android.widget.Toast
-import androidx.compose.ui.platform.LocalContext
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.plcoding.project.ui.theme.LightBlue
+import com.plcoding.project.ui.theme.WarningRed
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -16,7 +18,8 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class BookViewModel(
-    private val dao: BookDao
+    private val dao: BookDao,
+    private val context: Context
 ) : ViewModel() {
 
     private val _sortField = MutableStateFlow(SortField.TITLE)
@@ -49,14 +52,6 @@ class BookViewModel(
                 }
             }
 
-            BookEvent.HideDialog -> {
-                _state.update {
-                    it.copy(
-                        isAddingBook = false
-                    )
-                }
-            }
-
             BookEvent.SaveBook -> {
                 val title = state.value.title
                 val genre = state.value.genre
@@ -64,7 +59,13 @@ class BookViewModel(
                 val rating = state.value.rating
                 val isRead = state.value.isRead
 
-                if (title.isBlank() || rating.isNaN() || rating < 0 || rating > 10){
+                if (title.isBlank()){
+                    showToast(context, context.getString(R.string.blank_title), WarningRed)
+                    return;
+                }
+
+                if (rating.isNaN() || rating < 1 || rating > 10){
+                    showToast(context, context.getString(R.string.invalid_rating), WarningRed)
                     return;
                 }
 
@@ -81,13 +82,13 @@ class BookViewModel(
                 }
 
                 _state.update { it.copy(
-                    isAddingBook = false,
                     title = "",
                     genre = "",
                     author = "",
                     rating = 0.0,
                     isRead = false
                 ) }
+                showToast(context, context.getString(R.string.book_added), LightBlue)
             }
 
             is BookEvent.SetTitle -> {
@@ -126,14 +127,6 @@ class BookViewModel(
                 _state.update {
                     it.copy(
                         isRead = event.isRead
-                    )
-                }
-            }
-
-            BookEvent.ShowDialog -> {
-                _state.update {
-                    it.copy(
-                        isAddingBook = true
                     )
                 }
             }

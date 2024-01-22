@@ -10,4 +10,10 @@
     <string name="not_read">Not read yet</string>
     <string name="sort_field">Sort field:</string>
     <string name="confirm">Confirm</string>
+    <string name="blank_title">Title is required</string>
+    <string name="invalid_rating">Invalid rating (should be from 0 to 10)</string>
+    <string name="book_added">Book added</string>
+    <string name="book_deleted">Book deleted</string>
+    <string name="sorted_by">List sorted by</string>
+    <string name="books">Books</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.plcoding.project
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -39,26 +40,28 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.plcoding.project.navigation.NavigationDestination
 import com.plcoding.project.ui.theme.LightBlue
 import com.plcoding.project.ui.theme.LightOrange
 
-object BookScreenDestination : NavigationDestination {
-    override val route = "books"
-    override val titleRes = R.string.books
+object AddBookScreenDestination : NavigationDestination {
+    override val route = "book_add"
+    override val titleRes = R.string.add_book
 }
 
 @Composable
-fun BookScreen(
+fun AddBookScreen(
     state: BookState,
     context: Context,
-    onEvent: (BookEvent) -> Unit,
-    navigateToAddBookScreen: () -> Unit
+    navController: NavHostController = NavHostController(context),
+    onEvent: (BookEvent) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     var selectedIndex by remember { mutableStateOf(0) }
@@ -78,29 +81,6 @@ fun BookScreen(
                         expanded = true
                     }
                 ) {
-                    Icon(
-                        imageVector = if (expanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                        contentDescription = "Sort",
-                        modifier = Modifier.padding(end = 4.dp)
-                    )
-
-                    Text(
-                        text = stringResource(R.string.sort_field),
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    Text(
-                        text = stringResource(
-                            when (SortField.values()[selectedIndex]) {
-                                SortField.TITLE -> R.string.title
-                                SortField.GENRE -> R.string.genre
-                                SortField.AUTHOR -> R.string.author
-                                SortField.RATING -> R.string.rating
-                                SortField.IS_READ -> R.string.is_read
-                            }
-                        )
-                    )
-
                     DropdownMenu(
                         expanded = expanded,
                         onDismissRequest = { expanded = false },
@@ -203,7 +183,9 @@ fun BookScreen(
             contentAlignment = Alignment.BottomCenter
         ) {
             Button(
-                onClick = navigateToAddBookScreen,
+                onClick = {
+                    navController.navigate(BookScreenDestination.route)
+                },
                 modifier = Modifier
                     .padding(16.dp) // Adjust padding as needed
             ) {

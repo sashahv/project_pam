@@ -34,10 +34,9 @@ import kotlinx.coroutines.launch
 fun AddBookDialog(
     state: BookState,
     onEvent: (BookEvent) -> Unit,
-    modifier: Modifier = Modifier,
-    context: Context
+    modifier: Modifier = Modifier
 ) {
-    var ratingText by remember { mutableStateOf(state.rating.toString()) }
+    var ratingText by remember { mutableStateOf("") }
 
     AlertDialog(
         modifier = modifier,
@@ -129,7 +128,6 @@ fun AddBookDialog(
                 Button(
                     onClick = {
                         onEvent(BookEvent.SaveBook)
-                        showToast(context, "Book saved!")
                     }
                 ) {
                     Text(

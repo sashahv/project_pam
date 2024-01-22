@@ -7,6 +7,5 @@ data class BookState(
     var author: String = "",
     var rating: Double = 0.0,
     var isRead: Boolean = false,
-    var isAddingBook: Boolean = false,
     var sortField: SortField = SortField.TITLE,
 )
