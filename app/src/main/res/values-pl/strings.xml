@@ -6,7 +6,7 @@
     <string name="author">Autor</string>
     <string name="rating">Ocena</string>
     <string name="is_read">Przeczytana</string>
-    <string name="already_read">Już przeczytane</string>
+    <string name="already_read">Przeczytana</string>
     <string name="not_read">Nieprzeczytana</string>
     <string name="sort_field">Pole sortowania:</string>
     <string name="confirm">Potwierdź</string>
